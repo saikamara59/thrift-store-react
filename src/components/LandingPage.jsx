@@ -8,7 +8,7 @@ const LandingPage = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       navigate("/home"); // Redirect to the home page after 5 seconds
-    }, 5000); // 5000 milliseconds = 5 seconds
+    }, 10000); // 5000 milliseconds = 5 seconds
 
     return () => clearTimeout(timer); // Cleanup the timer
   }, [navigate]);

@@ -14,10 +14,10 @@ return (
             A New York Thrift Store was started by a young developer by the name of Saidu Kamara in 2025 this store sells high end fashion pieces and rare vintage items
         </p>
         <div>
-            <Link to="/signin">
+            <Link to="/sign-in">
             Sign In
             </Link>
-            <Link to="/signup">
+            <Link to="/sign-up">
             Sign Up
             </Link>
         </div>
