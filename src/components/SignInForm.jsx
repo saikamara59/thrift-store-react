@@ -1,10 +1,9 @@
 // src/components/SignInForm/SignInForm.jsx
 
 import { useState, useContext } from 'react';
-import { useNavigate } from 'react-router';
+import { useNavigate } from 'react-router-dom';
 import React from 'react';
 import { signIn } from '../services/authService';
-import { signUp } from '../services/authService'
 import { UserContext } from '../contexts/UserContext';
 
 const SignInForm = () => {
@@ -28,7 +27,8 @@ const SignInForm = () => {
       // It will cause an error right now
       const signedInUser = await signIn(formData);
       setUser(signedInUser);
-      navigate('/home');
+      console.log(signedInUser)
+      navigate('/products');
     } catch (err) {
       setMessage(err.message);
     }
@@ -37,7 +37,7 @@ const SignInForm = () => {
   return (
     <main>
       <h1>Sign In</h1>
-      <p>{message}</p>
+      {message &&<p>{message} </p>}
       <form autoComplete='off' onSubmit={handleSubmit}>
         <div>
           <label htmlFor='email'>Username:</label>
@@ -64,8 +64,8 @@ const SignInForm = () => {
           />
         </div>
         <div>
-          <button>Sign In</button>
-          <button onClick={() => navigate('/home')}>Cancel</button>
+          <button type="submit">Sign In</button>
+          <button type="button" onClick={() => navigate('/home')}>Cancel</button>
         </div>
       </form>
     </main>

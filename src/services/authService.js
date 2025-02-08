@@ -48,7 +48,9 @@ const signIn = async (formData) => {
 
     if (data.token) {
       localStorage.setItem('token', data.token);
-      return JSON.parse(atob(data.token.split('.')[1])).payload;
+      const user = JSON.parse(atob(data.token.split('.')[1]))
+      console.log(user)
+      return user 
     }
 
     throw new Error('Invalid response from server');

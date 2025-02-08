@@ -1,6 +1,5 @@
 import React from "react" 
-import { useState } from "react";
-import { useContext } from 'react';
+import { useState , useContext} from "react";
 import { useNavigate } from 'react-router';
 import { signUp } from '../services/authService';
 import { UserContext } from '../contexts/UserContext';
@@ -99,7 +98,7 @@ const SignUpForm = () => {
         </div>
         <div>
           <button disabled={isFormInvalid()}>Sign Up</button>
-          <button onClick={() => navigate('/home')}>Cancel</button>
+          <button type="button" onClick={() => navigate('/home')}>Cancel</button>
         </div>
       </form>
     </main>
