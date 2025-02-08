@@ -7,6 +7,7 @@ import SignUpForm from "./components/SignUpForm";
 import NavBar from "./components/NavBar";
 import ProductIndex from "./components/ProductIndex";
 import SignInForm from "./components/SignInForm";
+import ShoppingCart from "./components/ShoppingCart";
 import * as productService from "./services/productService";
 import ProductDetails from "./components/ProductDetails";
 
@@ -44,6 +45,7 @@ const App = () => {
         {user && (
           <>
             <Route path="/products" element={<ProductIndex products={products} />} />
+            <Route path="/cart" element={<ShoppingCart />} />
             <Route path="/products/:productId" element={<ProductDetails />} />
           </>
         )}
