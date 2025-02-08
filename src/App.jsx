@@ -1,59 +1,54 @@
-import React from "react";
-import { useContext,useState,useEffect } from "react";
-import { Route, Routes, } from "react-router-dom";
-import { UserContext, UserProvider } from "./contexts/UserContext";
+import React, { useContext, useState, useEffect } from "react";
+import { Route, Routes } from "react-router-dom";
+import { UserContext } from "./contexts/UserContext";
 import LandingPage from "./components/LandingPage";
 import HomePage from "./components/HomePage";
 import SignUpForm from "./components/SignUpForm";
 import NavBar from "./components/NavBar";
 import ProductIndex from "./components/ProductIndex";
-
 import SignInForm from "./components/SignInForm";
-import * as productService from "./services/productService"
+import * as productService from "./services/productService";
 import ProductDetails from "./components/ProductDetails";
 
 const App = () => {
-
   const { user } = useContext(UserContext);
-  const [products, setProducts] = useState([])
+  const [products, setProducts] = useState([]);
 
   useEffect(() => {
     const fetchAllProducts = async () => {
-      const productsData = await productService.index();
-      setProducts(productsData || [])
-      // console log to verify
-      console.log('productsData:', productsData);
+      try {
+        const productsData = await productService.index();
+        setProducts(productsData || []);
+        console.log("productsData:", productsData);
+      } catch (error) {
+        console.error("Error fetching products:", error);
+      }
     };
+
     if (user) fetchAllProducts();
   }, [user]);
 
-  
   return (
     <>
-    {user && <NavBar />
-    }     
-   
-      <Routes>  
-       
-        <Route path="/" element={<LandingPage />}/>
-         {user ? (
+      {/* Conditionally render NavBar only if user is logged in */}
+      {user && <NavBar />}
+
+      <Routes>
+        {/* Public routes (always available) */}
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/home" element={<HomePage />} />
+        <Route path="/sign-in" element={<SignInForm />} />
+        <Route path="/sign-up" element={<SignUpForm />} />
+
+        {/* Protected routes (only for logged-in users) */}
+        {user && (
           <>
-        <Route path='/products' element={<ProductIndex products={products} />}/>
-        <Route 
-        path='/products/:productId'
-        element={<ProductDetails />} />
-</>
-    ): (
-    <>
-    <Route path="/home" element={ <HomePage />}/>
-    <Route path="/sign-in" element={<SignInForm />}/>
-    <Route path="/sign-up" element={<SignUpForm />}/>
-    {/* <Route path="*" element={<Navigate to="/" />} /> */}
-    </> 
-  )} 
-    </Routes>
- 
-  </>
+            <Route path="/products" element={<ProductIndex products={products} />} />
+            <Route path="/products/:productId" element={<ProductDetails />} />
+          </>
+        )}
+      </Routes>
+    </>
   );
 };
 
