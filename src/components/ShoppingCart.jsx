@@ -77,7 +77,7 @@ const ShoppingCart = () => {
     calculateTotal,
     checkout,
   } = useContext(CartContext);
-
+console.log('cartItems:', cartItems)
   const navigate = useNavigate();
 
   // Calculate subtotal, shipping cost, and total

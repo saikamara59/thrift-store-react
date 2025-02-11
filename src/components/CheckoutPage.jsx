@@ -7,6 +7,8 @@ import { createOrder } from '../services/orderService';
 
 const CheckoutPage = () => {
   const { cartItems, removeFromCart, updateQuantity } = useContext(CartContext);
+  console.log('CheckoutPage cartItems:', cartItems);
+  
   const [shippingInfo, setShippingInfo] = useState({
     name: '',
     address: '',

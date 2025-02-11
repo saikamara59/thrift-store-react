@@ -57,6 +57,8 @@ const CartContext = createContext();
 
 const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState([]); // Array to hold cart items
+  console.log('Cart Items:', cartItems)
+  
   const [orders, setOrders] = useState([]); // Array to hold past orders
 
   // Add a product to the cart

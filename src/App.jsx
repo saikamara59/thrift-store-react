@@ -119,9 +119,12 @@ const App = () => {
               <Route path="/products" element={<ProductIndex products={products} />} />
               <Route path="/products/:productId" element={<ProductDetails />} />
               <Route path="/order-history" element={<OrderHistory />} />
+              
               <Route path="/cart" element={<ShoppingCart />} />
+              
               <Route path="/checkout" element={<CheckoutPage />} />
               <Route path="/order-confirmation" element={<OrderConfirmation />} />
+              
             </>
           )}
         </Routes>
