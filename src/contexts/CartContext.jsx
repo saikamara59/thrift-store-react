@@ -53,26 +53,16 @@
 
 import React, { createContext, useState } from 'react';
 
-// Create the CartContext
 const CartContext = createContext();
 
-// Create the CartProvider component
 const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState([]); // Array to hold cart items
   const [orders, setOrders] = useState([]); // Array to hold past orders
-  const [lastOrder, setLastOrder] = useState(()  => {
-    // Retrieve lastOrder from localStorage on initial load
-    const savedLastOrder = localStorage.getItem('lastOrder');
-    return savedLastOrder ? JSON.parse(savedLastOrder) : null;
-  });
 
-
-  
-
+  // Add a product to the cart
   const addToCart = (product) => {
-    console.log('Adding product to cart:',product)
     setCartItems((prevCart) => {
-      const existingItem = prevCart.find((item) => item.id === product.product_id); // Use product_id
+      const existingItem = prevCart.find((item) => item.id === product.product_id);
       if (existingItem) {
         // If the item already exists, increment its quantity
         return prevCart.map((item) =>
@@ -88,7 +78,7 @@ const CartProvider = ({ children }) => {
             ...product,
             id: product.product_id, // Map product_id to id
             quantity: 1,
-            price: parseFloat(product.price), 
+            price: parseFloat(product.price), // Ensure price is a number
           },
         ];
       }
@@ -97,9 +87,7 @@ const CartProvider = ({ children }) => {
 
   // Remove a product from the cart entirely
   const removeFromCart = (productId) => {
-    setCartItems((prevItems) =>
-      prevItems.filter((item) => item.id !== productId)
-    );
+    setCartItems((prevItems) => prevItems.filter((item) => item.id !== productId));
   };
 
   // Update the quantity of a product in the cart
@@ -110,8 +98,6 @@ const CartProvider = ({ children }) => {
       )
     );
   };
-
-  
 
   // Calculate the total price of items in the cart
   const calculateTotal = () => {
@@ -124,7 +110,7 @@ const CartProvider = ({ children }) => {
   // Handle checkout (save the order and clear the cart)
   const checkout = () => {
     if (cartItems.length === 0) {
-      alert("Your cart is empty!");
+      alert('Your cart is empty!');
       return;
     }
 
@@ -132,27 +118,27 @@ const CartProvider = ({ children }) => {
       id: new Date().getTime(), // Unique order ID based on timestamp
       date: new Date().toLocaleString(), // Date when the order was placed
       items: cartItems,
-      total: calculateTotal(),
+      total: calculateTotal(), // Use calculateTotal to get the order total
     };
 
     // Save order to orders state
     setOrders((prevOrders) => [...prevOrders, order]);
 
-    setLastOrder(order);
-    localStorage.setItem('lastOrder', JSON.stringify(order)); // Save to localStorage
+    // Save the last order to localStorage
+    localStorage.setItem('lastOrder', JSON.stringify(order));
+
     // Clear the cart after checkout
     setCartItems([]);
-};
+  };
 
   // Value to be provided by the context
   const value = {
     cartItems,
     orders,
-    lastOrder, // Provide the last order
     addToCart,
     removeFromCart,
     updateQuantity,
-    calculateTotal,
+    calculateTotal, // Include calculateTotal in the context value
     checkout,
   };
 

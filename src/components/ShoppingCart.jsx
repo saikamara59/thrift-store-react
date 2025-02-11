@@ -65,7 +65,7 @@
 // export default ShoppingCart
 
 
-import React, { useContext } from 'react';
+import React, { useContext,useEffect } from 'react';
 import { CartContext } from '../contexts/CartContext';
 import { useNavigate } from 'react-router-dom';
 
@@ -97,7 +97,9 @@ const ShoppingCart = () => {
   };
 
   // Debug: Log cart items to verify their structure
-  console.log('Cart Items:', cartItems);
+  useEffect(() => {
+    console.log('Cart Items:', cartItems);
+  }, [cartItems]);
 
   return (
     <main>

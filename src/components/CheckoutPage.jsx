@@ -3,6 +3,8 @@ import { CartContext } from '../contexts/CartContext';
 import { useNavigate } from 'react-router-dom';
 import { createOrder } from '../services/orderService';
 
+
+
 const CheckoutPage = () => {
   const { cartItems, removeFromCart, updateQuantity } = useContext(CartContext);
   const [shippingInfo, setShippingInfo] = useState({
