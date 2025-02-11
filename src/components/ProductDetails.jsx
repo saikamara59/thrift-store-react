@@ -47,15 +47,17 @@
 
 // export default ProductDetails
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect,useContext } from 'react';
 import { useParams,useNavigate } from 'react-router-dom'; // Corrected import
 import * as productService from '../services/productService';
+import { CartContext } from '../contexts/CartContext';
 
 const ProductDetails = () => {
   const [product, setProduct] = useState(null);
   const { productId } = useParams(); 
   const navigate = useNavigate(); 
   console.log('productId', productId);
+   const {addToCart} = useContext(CartContext)
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -89,7 +91,7 @@ const ProductDetails = () => {
           <p>Price: ${product.price}</p>
           <p>Size: {product.size}</p>
           <p>Condition: {product.condition}</p>
-          <button onClick={() => alert('Added to cart!')}>Add to Cart</button>
+          <button onClick={() => addToCart(product)}>Add to Cart</button>
           <button onClick={() =>
              navigate('/products')}>Return to All Products</button>
         </header>

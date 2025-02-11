@@ -43,29 +43,29 @@ import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { CartContext } from "../contexts/CartContext";
 
-
 const ProductIndex = ({ products }) => {
-  const {addToCart} = useContext(CartContext)
+  const { addToCart } = useContext(CartContext);
 
   return (
     <main>
       {products.map((product) => (
-        <Link key={product.product_id} to={`/products/${product.product_id}`}>
-          <article>
-            <h3>{product.name}</h3> 
-            <img
-              src={product.image_url}
-              alt={product.name}
-              style={{ width: "100px", height: "auto" }}
-            />
-            <p>Description: {product.description}</p>
-            <p>Price: ${product.price}</p>
-            <p>Size: {product.size}</p>
-            <p>Condition: {product.condition}</p>
-           
-             <button onClick={() => addToCart(product)}>Add to Cart</button>
-          </article>
-        </Link>
+        <div key={product.product_id}>
+          <Link to={`/products/${product.product_id}`}>
+            <article>
+              <h3>{product.name}</h3>
+              <img
+                src={product.image_url}
+                alt={product.name}
+                style={{ width: "100px", height: "auto" }}
+              />
+              <p>Description: {product.description}</p>
+              <p>Price: ${product.price}</p>
+              <p>Size: {product.size}</p>
+              <p>Condition: {product.condition}</p>
+            </article>
+          </Link>
+          <button onClick={() => addToCart(product)}>Add to Cart</button>
+        </div>
       ))}
     </main>
   );

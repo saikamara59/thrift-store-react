@@ -2,7 +2,7 @@ const BASE_URL = `${import.meta.env.VITE_BACK_END_SERVER_URL}/orders`;
 
 const createOrder = async (orderData) => {
   try {
-    const res = await fetch(`${BASE_URL}/orders`, {
+    const res = await fetch(BASE_URL, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -18,7 +18,7 @@ const createOrder = async (orderData) => {
 
 const fetchUserOrders = async () => {
   try {
-    const res = await fetch(`${BASE_URL}/orders`, {
+    const res = await fetch(BASE_URL, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
@@ -27,4 +27,9 @@ const fetchUserOrders = async () => {
   } catch (err) {
     throw new Error("Failed to fetch orders");
   }
+};
+
+
+export {
+  createOrder,fetchUserOrders
 };
