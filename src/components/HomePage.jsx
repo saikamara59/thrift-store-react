@@ -26,8 +26,6 @@ const HomePage = () => {
           </Link>
         </div>
       </div>
-
-      {/* Footer */}
       <footer className="bg-customYellow text-center py-4 mt-auto">
         <p className="text-lg font-irish">
           &copy; 2025 New York Thrift Store. All rights reserved.
