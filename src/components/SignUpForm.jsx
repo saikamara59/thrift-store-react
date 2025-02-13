@@ -44,14 +44,14 @@ const SignUpForm = () => {
   return (
     <div
       className="min-h-screen bg-cover bg-center flex flex-col items-center justify-center"
-      style={{ backgroundImage: `url(${thriftbg})` }} // Set the background image
+      style={{ backgroundImage: `url(${thriftbg})` }} 
     >
-      {/* Store Logo in Top Left */}
+      
       <div className="absolute top-5 left-5">
-        <img src={storelogo} alt="Store Logo" className="h-12" /> {/* Adjust height as needed */}
+        <img src={storelogo} alt="Store Logo" className="h-12" /> 
       </div>
 
-      {/* Sign Up Form */}
+    
       <main className="bg-red-400 bg-opacity-90 p-8 rounded-lg shadow-lg w-full max-w-md inner-shadow">
         <h1 className="text-4xl  mb-4 text-center font-irish font-bold">Sign Up</h1>
         {message && <p className="text-red-500 text-center mb-4">{message}</p>}

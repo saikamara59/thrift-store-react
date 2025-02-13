@@ -93,8 +93,8 @@ import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { signIn } from '../services/authService';
 import { UserContext } from '../contexts/UserContext';
-import storelogo from '../assets/storelogo.png'; // Path to your store logo
-import thriftbg from '../assets/thriftstore.jpg'; // Path to your background image
+import storelogo from '../assets/storelogo.png'; 
+import thriftbg from '../assets/thriftstore.jpg'; 
 
 const SignInForm = () => {
   const navigate = useNavigate();
@@ -126,7 +126,6 @@ const SignInForm = () => {
       className="min-h-screen bg-cover bg-center flex flex-col items-center justify-center"
       style={{ backgroundImage: `url(${thriftbg})` }}
     >
-      {/* Store Logo in Top Left */}
       <div className="absolute top-5 left-5">
         <img src={storelogo} alt="Store Logo" className="h-12" />
       </div>
