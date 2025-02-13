@@ -1,25 +1,28 @@
 // src/contexts/UserContext.jsx
 
-
-import React, { createContext, useState, useEffect } from 'react';
+import React from 'react'
+import  { createContext, useState} from 'react';
 
 // Create UserContext
  const UserContext = createContext();
+ const getUserFromToken = () => {
+  const token = localStorage.getItem('token');
+
+  if (!token) return null;
+
+  return JSON.parse(atob(token.split('.')[1])).payload;
+};
 
 // UserProvider component to provide the user data
 function UserProvider  ({ children }) {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(getUserFromToken());
 
 
   const value = {user,setUser}
-  // useEffect(() => {
+  
 
     
-  //   const storedUser = localStorage.getItem("user"); // Example for stored user in localStorage
-  //   if (storedUser) {
-  //     setUser(JSON.parse(storedUser)); // Set user from localStorage or session
-  //   }
-  // }, []);
+
 
   return (
     <UserContext.Provider value={ value}>

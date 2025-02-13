@@ -127,7 +127,7 @@ const SignInForm = () => {
   return (
     <main>
       <h1>Sign In</h1>
-      {message &&<p>{message} </p>}
+      <p>{message} </p>
       <form autoComplete='off' onSubmit={handleSubmit}>
         <div>
           <label htmlFor='email'>Username:</label>

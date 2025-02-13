@@ -1,11 +1,12 @@
-import React, { useContext } from 'react';
+import  { useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom'; 
 import { UserContext } from '../contexts/UserContext';
-
+import React from 'react'
 
 const NavBar = () => {
   // Access user and setUser from the UserContext
   const { user, setUser } = useContext(UserContext);
+  // const {user} = useContext(UserContext);
   const navigate = useNavigate();
   // Handle sign-out
   const handleSignOut = () => {
@@ -13,7 +14,7 @@ const NavBar = () => {
     localStorage.removeItem('token');
     // Clear the user state
     setUser(null);
-    navigate('/sign-in');
+    navigate('/home');
   };
 
   return (
@@ -22,12 +23,13 @@ const NavBar = () => {
         <ul>
           <li>Welcome, {user.username}</li>
           <li>
-            <Link to="/home" onClick={handleSignOut}>
-              Sign Out
-            </Link>
+          
           </li>
           <li><Link to="/products">Products</Link></li>
-          <li> <Link to="/cart">View Cart</Link></li>
+          <li> <Link to="/cart">View Cart</Link></li>  
+          <Link to="/home" onClick={handleSignOut}>
+              Sign Out
+            </Link>
         </ul>
         
       ) : (

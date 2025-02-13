@@ -6,9 +6,11 @@ import { createOrder } from '../services/orderService';
 
 
 const CheckoutPage = () => {
-  const { cartItems, removeFromCart, updateQuantity } = useContext(CartContext);
+  const { cartItems} = useContext(CartContext);
   console.log('CheckoutPage cartItems:', cartItems);
+
   
+
   const [shippingInfo, setShippingInfo] = useState({
     name: '',
     address: '',
@@ -44,6 +46,9 @@ const CheckoutPage = () => {
   const shippingCost = 6.99;
   const total = subtotal + shippingCost;
 
+  console.log('Subtotal:', subtotal);
+ console.log('Shipping Cost:', shippingCost);
+  console.log('Total:', total)
   
 
   const handlePayment = async () => {
@@ -57,6 +62,8 @@ const CheckoutPage = () => {
           price: item.price,
         })),
       };
+      console.log('Order Data:', orderData);
+
 
       const res = await createOrder(orderData); // 
       console.log('Order created:', res);
@@ -88,12 +95,12 @@ const CheckoutPage = () => {
       <h1>Checkout</h1>
       <section>
         <h2>Order Summary</h2>
-        {cartItems?.length === 0 ? (
+        {cartItems.length === 0 ? (
           <p>Your cart is empty.</p>
         ) : (
           <>
             <div>
-              {cartItems?.map((item) => (
+              {cartItems.map((item) => (
                 <div key={item.id} style={{ borderBottom: '1px solid #ccc', padding: '10px 0' }}>
                   <img
                     src={item.image_url}

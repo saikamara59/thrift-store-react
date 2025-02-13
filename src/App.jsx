@@ -67,14 +67,14 @@
 // export default App;
 
 
-
-import React, { useContext, useState, useEffect } from "react";
+import React from 'react'
+import  { useContext, useState, useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 import { UserContext } from "./contexts/UserContext";
 import LandingPage from "./components/LandingPage";
 import HomePage from "./components/HomePage";
 import SignUpForm from "./components/SignUpForm";
-import NavBar from "./components/NavBar";
+// import NavBar from "./components/NavBar";
 import ProductIndex from "./components/ProductIndex";
 import SignInForm from "./components/SignInForm";
 import ShoppingCart from "./components/ShoppingCart";
@@ -83,7 +83,8 @@ import ProductDetails from "./components/ProductDetails";
 import OrderHistory from './components/OrderHistory';
 import CheckoutPage from "./components/CheckoutPage";
 import OrderConfirmation from "./components/OrderConfirmation";
-import { CartProvider } from "./contexts/CartContext";
+// import { CartProvider } from "./contexts/CartContext";
+
 
 const App = () => {
   const { user } = useContext(UserContext);
@@ -104,17 +105,15 @@ const App = () => {
   }, [user]);
 
   return (
-    <CartProvider>
+    // <CartProvider>
       <>
-        {user && <NavBar />}
+        {/* {user && <NavBar />} */}
 
         <Routes>
           <Route path="/" element={<LandingPage />} />
-          <Route path="/home" element={<HomePage />} />
-          <Route path="/sign-in" element={<SignInForm />} />
-          <Route path="/sign-up" element={<SignUpForm />} />
+        
 
-          {user && (
+          {user ? (
             <>
               <Route path="/products" element={<ProductIndex products={products} />} />
               <Route path="/products/:productId" element={<ProductDetails />} />
@@ -126,10 +125,16 @@ const App = () => {
               <Route path="/order-confirmation" element={<OrderConfirmation />} />
               
             </>
+          ) : (
+            <>
+              <Route path="/home" element={<HomePage />} />
+          <Route path="/sign-in" element={<SignInForm />} />
+          <Route path="/sign-up" element={<SignUpForm />} />
+          </>
           )}
         </Routes>
       </>
-    </CartProvider>
+    // </CartProvider>
   );
 };
 

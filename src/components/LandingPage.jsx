@@ -8,7 +8,7 @@ const LandingPage = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       navigate("/home"); // Redirect to the home page after 5 seconds
-    }, 5000); // 5000 milliseconds = 5 seconds
+    }, 20000); // 5000 milliseconds = 5 seconds
 
     return () => clearTimeout(timer); // Cleanup the timer
   }, [navigate]);
@@ -17,33 +17,31 @@ const LandingPage = () => {
 
   return (
     <section
-      className="flex items-center justify-center h-screen bg-cover bg-center relative"
-      style={{ backgroundImage: `url(${logo})`, border: "2px solid red" }} // Debug border
-    >
-      {/* Semi-transparent overlay */}
-      <div className="absolute inset-0 bg-black bg-opacity-50"></div>
+  className="flex items-center justify-center h-screen bg-cover bg-center relative saturate-50 sepia-0"
+  style={{ backgroundImage: `url(${logo})` }} // Set image as background
+>
+  {/* Semi-transparent overlay */}
+  <div className="absolute inset-0 bg-black bg-opacity-50"></div>
 
-      {/* Content */}
-      <div className="relative z-10 text-center bg-black bg-opacity-50 p-10 rounded-lg">
-        <img
-          src={logo}
-          alt="Warner Bros Logo"
-          className="w-36 mx-auto mb-6" // Adjust logo size and spacing
-        />
-        <h1 className="text-5xl font-bold text-white mb-4">
-          New York Thrift Store
-        </h1>
-        <p className="text-xl text-white mb-8">
-          Discover amazing deals and unique products.
-        </p>
-        <a
-          href="/home"
-          className="bg-orange-500 text-white px-8 py-3 rounded-lg text-lg hover:bg-orange-600 transition-colors"
-        >
-          Enter Store
-        </a>
-      </div>
-    </section>
+  {/* Content */}
+  <div className="relative z-10 text-center bg-black bg-opacity-50 p-10 rounded-lg backdrop-blur-sm">
+  <h1 className="text-6xl font-['Italiana'] text-[#ffffff] mb-4 font-stretch-extra-expanded ">
+   A New York Thrift Store
+</h1>
+
+
+    <p className="text-4xl font-['Italiana'] text-[#ffffff] mb-4">
+      Discover New York fashion and unique products.
+    </p>
+    <a
+      href="/home"
+      className="text-3xl font-['Italiana'] text-[#ffffff] mb-4"
+    >
+      Enter Store
+    </a>
+  </div>
+</section>
+
   );
 };
 

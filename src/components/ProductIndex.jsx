@@ -38,7 +38,7 @@
 
 // export default ProductIndex
 
-
+import NavBar from "../components/NavBar";
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { CartContext } from "../contexts/CartContext";
@@ -47,7 +47,9 @@ const ProductIndex = ({ products }) => {
   const { addToCart } = useContext(CartContext);
 
   return (
+   
     <main>
+       <NavBar />
       {products.map((product) => (
         <div key={product.product_id}>
           <Link to={`/products/${product.product_id}`}>

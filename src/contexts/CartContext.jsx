@@ -58,7 +58,7 @@ const CartContext = createContext();
 const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState([]); // Array to hold cart items
   console.log('Cart Items:', cartItems)
-  
+
   const [orders, setOrders] = useState([]); // Array to hold past orders
 
   // Add a product to the cart
@@ -103,10 +103,12 @@ const CartProvider = ({ children }) => {
 
   // Calculate the total price of items in the cart
   const calculateTotal = () => {
-    return cartItems.reduce(
+    const total = cartItems.reduce(
       (total, item) => total + item.price * item.quantity,
       0
     );
+    console.log('Total:', total);
+    return total;
   };
 
   // Handle checkout (save the order and clear the cart)
@@ -122,6 +124,8 @@ const CartProvider = ({ children }) => {
       items: cartItems,
       total: calculateTotal(), // Use calculateTotal to get the order total
     };
+
+    console.log('Checkout Order:', order);
 
     // Save order to orders state
     setOrders((prevOrders) => [...prevOrders, order]);
@@ -151,4 +155,4 @@ const CartProvider = ({ children }) => {
   );
 };
 
-export { CartContext, CartProvider };
+export { CartContext , CartProvider };
