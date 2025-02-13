@@ -52,27 +52,29 @@ const SignUpForm = () => {
       </div>
 
       {/* Sign Up Form */}
-      <main className="bg-red-600 bg-opacity-80 p-8 rounded-lg shadow-lg w-full max-w-md">
-        <h1 className="text-4xl  mb-4 text-center font-irish">Sign Up</h1>
+      <main className="bg-red-400 bg-opacity-90 p-8 rounded-lg shadow-lg w-full max-w-md inner-shadow">
+        <h1 className="text-4xl  mb-4 text-center font-irish font-bold">Sign Up</h1>
         {message && <p className="text-red-500 text-center mb-4">{message}</p>}
-        <h2 className="text-center text-2xl">sign up to continue</h2>
+        <h2 className="text-center text-lg">Enter your correct details to get started</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label htmlFor="username" className="block text-sm font-medium text-gray-700">
-              Username:
+            <label htmlFor="username"
+             className="block text-2xl font-medium text-gray-700 p-2">
+              Username
             </label>
             <input
               type="text"
               id="username"
               value={username}
               name="username"
+              placeholder="Enter your username"
               onChange={handleChange}
               required
-              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
             />
           </div>
           <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+            <label htmlFor="email" className="block font-medium text-gray-700 text-2xl">
               Email:
             </label>
             <input
@@ -80,13 +82,15 @@ const SignUpForm = () => {
               id="email"
               value={email}
               name="email"
+              placeholder="Enter your email"
               onChange={handleChange}
               required
               className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
             />
           </div>
           <div>
-            <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+            <label htmlFor="password" 
+            className="block text-sm font-medium text-gray-700 text-2xl">
               Password:
             </label>
             <input
@@ -94,13 +98,14 @@ const SignUpForm = () => {
               id="password"
               value={password}
               name="password"
+              placeholder="Enter your password"
               onChange={handleChange}
               required
               className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
             />
           </div>
           <div>
-            <label htmlFor="confirm" className="block text-sm font-medium text-gray-700">
+            <label htmlFor="confirm" className="block text-sm font-medium text-gray-700 text-2xl">
               Confirm Password:
             </label>
             <input
@@ -108,6 +113,7 @@ const SignUpForm = () => {
               id="confirm"
               value={passwordConf}
               name="passwordConf"
+              placeholder="Confirm your password"
               onChange={handleChange}
               required
               className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"

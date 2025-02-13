@@ -28,7 +28,7 @@ const HomePage = () => {
       </div>
       <footer className="bg-customYellow text-center py-4 mt-auto">
         <p className="text-lg font-irish">
-          &copy; 2025 New York Thrift Store. All rights reserved.
+          &copy; 2025 A New York Thrift Store. All rights reserved.
         </p>
       </footer>
     </div>
