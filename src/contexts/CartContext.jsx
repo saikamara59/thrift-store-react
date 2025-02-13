@@ -51,13 +51,21 @@
 //   );
 // };
 
-import React, { createContext, useState } from 'react';
+import React, { createContext, useEffect, useState } from 'react';
 
 const CartContext = createContext();
 
 const CartProvider = ({ children }) => {
-  const [cartItems, setCartItems] = useState([]); // Array to hold cart items
-  console.log('Cart Items:', cartItems)
+  const [cartItems, setCartItems] = useState(() => {
+    const storedCart = localStorage.getItem("cartItems");
+    return storedCart ? JSON.parse(storedCart) : [];
+  })
+
+  useEffect(()=>{
+    localStorage.setItem("cartItems", JSON.stringify(cartItems))
+  })
+   // Array to hold cart items
+  // console.log('Cart Items:', cartItems)
 
   const [orders, setOrders] = useState([]); // Array to hold past orders
 
@@ -144,7 +152,7 @@ const CartProvider = ({ children }) => {
     addToCart,
     removeFromCart,
     updateQuantity,
-    calculateTotal, // Include calculateTotal in the context value
+    calculateTotal, 
     checkout,
   };
 

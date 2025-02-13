@@ -21,12 +21,12 @@ const NavBar = () => {
 
   return (
     <nav className="flex items-center justify-between p-4 bg-blue-400 text-white relative">
-      <div className="absolute left-5 top-5">
-        <img src={storelogo} alt="Store Logo" className="h-12" />
+      <div className="absolute left-4 top-4">
+        <img src={storelogo} alt="Store Logo" className="h-11" />
       </div>
 
    
-      <ul className="flex space-x-6 items-center justify-center flex-grow"> {/* Center the links */}
+      <ul className="flex space-x-6 items-center justify-center flex-grow"> 
         {user ? (
           <>
             <li>Welcome, {user.username}</li>

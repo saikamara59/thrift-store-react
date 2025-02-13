@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react';
 import { CartContext } from '../contexts/CartContext';
 import { useNavigate } from 'react-router-dom';
 import { createOrder } from '../services/orderService';
-
+import NavBar from './NavBar';
 
 
 const CheckoutPage = () => {
@@ -92,6 +92,7 @@ const CheckoutPage = () => {
 
   return (
     <main>
+      <NavBar />
       <h1>Checkout</h1>
       <section>
         <h2>Order Summary</h2>
