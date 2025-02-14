@@ -85,32 +85,12 @@
 // export default OrderConfirmation;
 
 import React, { useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 import { CartContext } from '../contexts/CartContext';
 
 const OrderConfirmation = () => {
   const navigate = useNavigate();
-  const { lastOrder, shippingInfo = {}, paymentInfo = {} } = useContext(CartContext);
-
-
-  const orderNumber = Math.floor(Math.random() * 1000000); // Random order number for mock
-  const orderDate = new Date().toLocaleDateString();
-
-  // Calculate total price for items
-  const totalPrice = lastOrder
-    ? lastOrder.items.reduce((total, item) => total + item.price * item.quantity, 0)
-    : 0;
-  const shippingCost = 6.99;
-  const total = totalPrice + shippingCost;
-
-  // Handle navigating to other pages
-  const handleContinueShopping = () => {
-    navigate('/home'); // Navigates to the home page or product list
-  };
-
-  const handleViewOrderHistory = () => {
-    navigate('/order-history'); // Navigates to the order history page
-  };
+  const { lastOrder } = useContext(CartContext);
 
   if (!lastOrder) {
     return (
@@ -118,7 +98,7 @@ const OrderConfirmation = () => {
         <h1 className="text-3xl font-bold mb-4">No order found.</h1>
         <p>Your order details are not available.</p>
         <button
-          onClick={handleContinueShopping}
+          onClick={() => navigate('/home')}
           className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 mt-4"
         >
           Continue Shopping
@@ -126,6 +106,12 @@ const OrderConfirmation = () => {
       </main>
     );
   }
+
+  const orderNumber = lastOrder.id;
+  const orderDate = lastOrder.date;
+  const totalPrice = lastOrder.items.reduce((total, item) => total + item.price * item.quantity, 0);
+  const shippingCost = 6.99;
+  const total = totalPrice + shippingCost;
 
   return (
     <main className="p-6">
@@ -151,12 +137,12 @@ const OrderConfirmation = () => {
         </ul>
 
         <h3 className="mt-4 text-xl font-semibold">Shipping Address:</h3>
-        {shippingInfo?.name ? (
+        {lastOrder.shippingInfo ? (
           <>
-            <p>{shippingInfo.name}</p>
-            <p>{shippingInfo.address}</p>
+            <p>{lastOrder.shippingInfo.name}</p>
+            <p>{lastOrder.shippingInfo.address}</p>
             <p>
-              {shippingInfo.city}, {shippingInfo.state} {shippingInfo.zip}
+              {lastOrder.shippingInfo.city}, {lastOrder.shippingInfo.state} {lastOrder.shippingInfo.zip}
             </p>
           </>
         ) : (
@@ -164,7 +150,7 @@ const OrderConfirmation = () => {
         )}
 
         <p>
-          <strong>Payment Method:</strong> {paymentInfo?.paymentMethod || 'Not specified'}
+          <strong>Payment Method:</strong> {lastOrder.paymentInfo?.paymentMethod || 'Not specified'}
         </p>
         <p>
           <strong>Shipping Method:</strong> Express
@@ -179,13 +165,13 @@ const OrderConfirmation = () => {
 
       <div className="mt-6 flex justify-between">
         <button
-          onClick={handleContinueShopping}
+          onClick={() => navigate('/home')}
           className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
         >
           Continue Shopping
         </button>
         <button
-          onClick={handleViewOrderHistory}
+          onClick={() => navigate('/order-history')}
           className="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600"
         >
           View Order History

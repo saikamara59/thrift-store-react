@@ -1,7 +1,7 @@
 import storelogo from '../assets/storelogo.png';
 import { CiShoppingCart } from "react-icons/ci";
 import { useContext } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router';
 import { UserContext } from '../contexts/UserContext';
 import React from 'react';
 import { FaSignOutAlt } from "react-icons/fa";
@@ -21,7 +21,7 @@ const NavBar = () => {
   };
 
   return (
-    <nav className="flex items-center justify-between p-4 bg-blue-500 text-white relative opacity-80">
+    <nav className="flex items-center justify-between p-4 bg-blue-300 text-black relative opacity-80 text-md">
       <div className="absolute left-4 top-4">
         <img src={storelogo} alt="Store Logo" className="h-11" />
       </div>

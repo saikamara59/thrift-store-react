@@ -52,115 +52,102 @@
 // };
 
 import React, { createContext, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const CartContext = createContext();
 
 const CartProvider = ({ children }) => {
+  const navigate = useNavigate();
   const [cartItems, setCartItems] = useState(() => {
-    const storedCart = localStorage.getItem("cartItems");
+    const storedCart = localStorage.getItem('cartItems');
     return storedCart ? JSON.parse(storedCart) : [];
-  })
+  });
 
-  useEffect(()=>{
-    localStorage.setItem("cartItems", JSON.stringify(cartItems))
-  })
-   // Array to hold cart items
-  // console.log('Cart Items:', cartItems)
+  const [orders, setOrders] = useState(() => {
+    const storedOrders = localStorage.getItem('orders');
+    return storedOrders ? JSON.parse(storedOrders) : [];
+  });
 
-  const [orders, setOrders] = useState([]); // Array to hold past orders
+  const [lastOrder, setLastOrder] = useState(() => {
+    const storedLastOrder = localStorage.getItem('lastOrder');
+    return storedLastOrder ? JSON.parse(storedLastOrder) : null;
+  });
 
-  // Add a product to the cart
+  useEffect(() => {
+    localStorage.setItem('cartItems', JSON.stringify(cartItems));
+  }, [cartItems]);
+
+  useEffect(() => {
+    localStorage.setItem('orders', JSON.stringify(orders));
+  }, [orders]);
+
+  useEffect(() => {
+    localStorage.setItem('lastOrder', JSON.stringify(lastOrder));
+  }, [lastOrder]);
+
   const addToCart = (product) => {
     setCartItems((prevCart) => {
       const existingItem = prevCart.find((item) => item.id === product.product_id);
       if (existingItem) {
-        // If the item already exists, increment its quantity
         return prevCart.map((item) =>
           item.id === product.product_id
             ? { ...item, quantity: item.quantity + 1 }
             : item
         );
       } else {
-        // If the item doesn't exist, add it to the cart
-        return [
-          ...prevCart,
-          {
-            ...product,
-            id: product.product_id, // Map product_id to id
-            quantity: 1,
-            price: parseFloat(product.price), // Ensure price is a number
-          },
-        ];
+        return [...prevCart, { ...product, id: product.product_id, quantity: 1, price: parseFloat(product.price) }];
       }
     });
   };
 
-  // Remove a product from the cart entirely
   const removeFromCart = (productId) => {
     setCartItems((prevItems) => prevItems.filter((item) => item.id !== productId));
   };
 
-  // Update the quantity of a product in the cart
   const updateQuantity = (productId, quantity) => {
     setCartItems((prevItems) =>
-      prevItems.map((item) =>
-        item.id === productId ? { ...item, quantity } : item
-      )
+      prevItems.map((item) => (item.id === productId ? { ...item, quantity } : item))
     );
   };
 
-  // Calculate the total price of items in the cart
   const calculateTotal = () => {
-    const total = cartItems.reduce(
-      (total, item) => total + item.price * item.quantity,
-      0
-    );
-    console.log('Total:', total);
-    return total;
+    return cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
   };
 
-  // Handle checkout (save the order and clear the cart)
-  const checkout = () => {
+  const checkout = (shippingInfo, paymentInfo) => {
     if (cartItems.length === 0) {
       alert('Your cart is empty!');
       return;
     }
 
     const order = {
-      id: new Date().getTime(), // Unique order ID based on timestamp
-      date: new Date().toLocaleString(), // Date when the order was placed
+      id: new Date().getTime(),
+      date: new Date().toLocaleString(),
       items: cartItems,
-      total: calculateTotal(), // Use calculateTotal to get the order total
+      total: calculateTotal(),
+      shippingInfo,
+      paymentInfo,
     };
 
-    console.log('Checkout Order:', order);
-
-    // Save order to orders state
     setOrders((prevOrders) => [...prevOrders, order]);
+    setLastOrder(order); // Save the last order
+    setCartItems([]); // Clear the cart
 
-    // Save the last order to localStorage
-    localStorage.setItem('lastOrder', JSON.stringify(order));
-
-    // Clear the cart after checkout
-    setCartItems([]);
+    navigate('/order-confirmation'); // Redirect to order confirmation
   };
 
-  // Value to be provided by the context
   const value = {
     cartItems,
     orders,
+    lastOrder,
     addToCart,
     removeFromCart,
     updateQuantity,
-    calculateTotal, 
+    calculateTotal,
     checkout,
   };
 
-  return (
-    <CartContext.Provider value={value}>
-      {children}
-    </CartContext.Provider>
-  );
+  return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
 };
 
-export { CartContext , CartProvider };
+export { CartContext, CartProvider };

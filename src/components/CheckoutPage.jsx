@@ -1,15 +1,12 @@
 import React, { useState, useContext } from 'react';
 import { CartContext } from '../contexts/CartContext';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 import { createOrder } from '../services/orderService';
 import NavBar from './NavBar';
 
-
 const CheckoutPage = () => {
-  const { cartItems} = useContext(CartContext);
-  console.log('CheckoutPage cartItems:', cartItems);
-
-  
+  const { cartItems, checkout,removeFromCart,updateQuantity } = useContext(CartContext); // Destructure checkout from CartContext
+  const navigate = useNavigate();
 
   const [shippingInfo, setShippingInfo] = useState({
     name: '',
@@ -32,12 +29,10 @@ const CheckoutPage = () => {
     cardNumber: '',
     expirationDate: '',
     cvv: '',
-    paymentMethod: 'creditCard', 
+    paymentMethod: 'creditCard',
   });
 
   const [useShippingAsBilling, setUseShippingAsBilling] = useState(false);
-
-  const navigate = useNavigate();
 
   const subtotal = cartItems.reduce(
     (total, item) => total + item.price * item.quantity,
@@ -46,27 +41,26 @@ const CheckoutPage = () => {
   const shippingCost = 6.99;
   const total = subtotal + shippingCost;
 
-  console.log('Subtotal:', subtotal);
- console.log('Shipping Cost:', shippingCost);
-  console.log('Total:', total)
-  
-
   const handlePayment = async () => {
     try {
       const orderData = {
         total_amount: total,
         shipping_address: `${shippingInfo.address}, ${shippingInfo.city}, ${shippingInfo.state} ${shippingInfo.zip}`,
         items: cartItems.map((item) => ({
-          product_id: item.id, 
+          product_id: item.id,
           quantity: item.quantity,
           price: item.price,
         })),
       };
       console.log('Order Data:', orderData);
-
-
-      const res = await createOrder(orderData); // 
+  
+      const res = await createOrder(orderData);
       console.log('Order created:', res);
+  
+      // Call the checkout function from CartContext
+      checkout(shippingInfo, paymentInfo);
+  
+      // Navigate to the order confirmation page
       navigate('/order-confirmation');
     } catch (error) {
       console.log('Payment failed:', error);
@@ -74,7 +68,6 @@ const CheckoutPage = () => {
     }
   };
 
-  // Update billing info when checkbox is toggled
   const handleUseShippingAsBillingChange = () => {
     setUseShippingAsBilling(!useShippingAsBilling);
     if (!useShippingAsBilling) {
@@ -110,9 +103,8 @@ const CheckoutPage = () => {
                   />
                   <h3>{item.name}</h3>
                   <p>Price: ${item.price}</p>
-                  <p>Description :{item.description}</p>
+                  <p>Description: {item.description}</p>
                   <p>Condition: {item.condition}</p>
-
                   <div>
                     <label>Quantity:</label>
                     <input
@@ -267,4 +259,3 @@ const CheckoutPage = () => {
 };
 
 export default CheckoutPage;
-

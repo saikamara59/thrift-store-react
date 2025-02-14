@@ -90,7 +90,7 @@
 // src/components/SignInForm/SignInForm.jsx
 import React from 'react';
 import { useState, useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 import { signIn } from '../services/authService';
 import { UserContext } from '../contexts/UserContext';
 import storelogo from '../assets/storelogo.png'; 

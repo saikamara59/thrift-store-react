@@ -39,7 +39,7 @@
 // export default ProductIndex
 import NavBar from "../components/NavBar";
 import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 import { CartContext } from "../contexts/CartContext";
 
 const ProductIndex = ({ products }) => {
@@ -47,7 +47,7 @@ const ProductIndex = ({ products }) => {
 
   
   return (
-    <main className="min-h-screen bg-gray-100">
+    <main className="min-h-screen bg-blue-100">
       <NavBar />
       <div className="container mx-auto p-4">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
@@ -64,10 +64,10 @@ const ProductIndex = ({ products }) => {
                     className="w-32 h-32 sm:w-24 sm:h-24 object-cover rounded-md mb-2"
                   />
                   <h3 className="text-lg font-semibold">{product.name}</h3>
-                  <p className="text-sm text-gray-600 mt-1">{product.description}</p>
+                  <p className="text-md text-gray-600 mt-1">{product.description}</p>
                   <p className="text-md font-bold mt-1">Price: ${product.price}</p>
-                  <p className="text-sm text-gray-700 mt-1">Size: {product.size}</p>
-                  <p className="text-sm text-gray-700 mt-1">Condition: {product.condition}</p>
+                  <p className="text-md text-gray-600 mt-1">Size: {product.size}</p>
+                  <p className="text-md text-gray-600 mt-1">Condition: {product.condition}</p>
                 </article>
               </Link>
               <button
