@@ -92,7 +92,7 @@ const OrderConfirmation = () => {
   const navigate = useNavigate();
   const { lastOrder, shippingInfo = {}, paymentInfo = {} } = useContext(CartContext);
 
-  // Generate mock order number and order date
+
   const orderNumber = Math.floor(Math.random() * 1000000); // Random order number for mock
   const orderDate = new Date().toLocaleDateString();
 
