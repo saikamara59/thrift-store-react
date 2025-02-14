@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import  NavBar from '../components/NavBar'
 
 const ShoppingCart = () => {
-  const { cartItems, removeFromCart, updateQuantity,checkout} = useContext(CartContext);
+  const { cartItems, removeFromCart, updateQuantity ,checkout} = useContext(CartContext);
   console.log('cartItems:', cartItems)
 
   const subtotal = cartItems.reduce(

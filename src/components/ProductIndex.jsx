@@ -44,7 +44,8 @@ import { CartContext } from "../contexts/CartContext";
 
 const ProductIndex = ({ products }) => {
   const { addToCart } = useContext(CartContext);
-console.log("Added to Cart",addToCart)
+
+  
   return (
     <main className="min-h-screen bg-gray-100">
       <NavBar />

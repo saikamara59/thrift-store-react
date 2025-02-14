@@ -4,6 +4,7 @@ import { useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { UserContext } from '../contexts/UserContext';
 import React from 'react';
+import { FaSignOutAlt } from "react-icons/fa";
 
 const NavBar = () => {
   // Access user and setUser from the UserContext
@@ -20,7 +21,7 @@ const NavBar = () => {
   };
 
   return (
-    <nav className="flex items-center justify-between p-4 bg-blue-400 text-white relative">
+    <nav className="flex items-center justify-between p-4 bg-blue-500 text-white relative opacity-80">
       <div className="absolute left-4 top-4">
         <img src={storelogo} alt="Store Logo" className="h-11" />
       </div>
@@ -40,7 +41,7 @@ const NavBar = () => {
             </li>
             <li>
               <Link to="/home" onClick={handleSignOut}>
-                Sign Out
+                <FaSignOutAlt className='text-2xl' />
               </Link>
             </li>
           </>
