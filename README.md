@@ -2,7 +2,8 @@
 
 ![Screenshot 2025-02-15 140426](https://github.com/user-attachments/assets/a77b760f-67e6-42e6-ae09-4b1f1e14ff9c)
 
-## About  A New York Thrift Store is a full stack web e-commerce platform designed to bring the charm of thrift shopping to your fingertips. Whether you're looking for vintage tees, retro jackets, or unique accessories, our store offers a wide range of items to suit every style. Built with modern web technologies, this platform provides a seamless shopping experience for users while promoting sustainable fashion.
+## About  
+A New York Thrift Store is a full stack web e-commerce platform designed to bring the charm of thrift shopping to your fingertips. Whether you're looking for vintage tees, retro jackets, or unique accessories, our store offers a wide range of items to suit every style. Built with modern web technologies, this platform provides a seamless shopping experience for users while promoting sustainable fashion.
 
 
 ## Getting Started - deployment link: Front End -
