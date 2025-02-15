@@ -27,7 +27,7 @@ const ProductDetails = () => {
   if (!product) return <main>Loading...</main>;
 
   return (
-    <main className="min-h-screen bg-blue-200">
+    <main className="min-h-screen bg-blue-100">
       <NavBar />
       <section className="flex justify-center items-center p-6">
         <div className="bg-white rounded-lg shadow-lg overflow-hidden max-w-2xl w-full">

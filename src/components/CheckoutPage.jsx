@@ -96,9 +96,9 @@ const CheckoutPage = () => {
   };
 
   return (
-    <main className="bg-blue-200 p-4">
+    <main className="bg-blue-100 p-4">
       <NavBar />
-      <h1 className="font-bold text-2xl text-center mb-6">Checkout</h1>
+      <h1 className="font-bold text-3xl text-center mb-6 p-5 font-irish">Checkout</h1>
 
       {error && <p className="text-red-500 text-center mb-4">{error}</p>}
 
@@ -108,7 +108,7 @@ const CheckoutPage = () => {
           <p>Your cart is empty.</p>
         ) : (
           <>
-            <div className="grid grid-cols-4 sm:grid-cols-2 lg:grid-cols-3 gap-7 shadow-md">
+            <div className="grid grid-cols sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-3 gap-7 shadow-lg">
               {cartItems.map((item) => (
                 <div key={item.id} className="bg-white rounded-lg shadow-md p-4 hover:shadow-lg transition-shadow duration-300">
                   <img src={item.image_url} alt={item.name} className="w-full h-48 object-cover rounded-md mb-4" />
@@ -126,7 +126,7 @@ const CheckoutPage = () => {
               ))}
             </div>
             <div className="mt-6">
-              <h2 className="text-xl font-semibold">Order Total</h2>
+              <h2 className="text-xl font-semibold font-irish">Order Total</h2>
               <p>Subtotal: ${subtotal.toFixed(2)}</p>
               <p>Shipping: ${shippingCost.toFixed(2)}</p>
               <p className="font-bold">Total: ${total.toFixed(2)}</p>
@@ -182,7 +182,7 @@ const CheckoutPage = () => {
       </section>
 
       <section className="mb-8">
-        <h2 className="text-xl font-semibold mb-4">Payment Information</h2>
+        <h2 className="text-xl font-semibold mb-4 font-irish">Payment Information</h2>
         <form className="grid grid-cols-1 gap-4">
           {['cardholderName', 'cardNumber', 'expirationDate', 'cvv'].map((field) => (
             <div key={field}>

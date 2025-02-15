@@ -7,7 +7,7 @@ const ProductIndex = ({ products }) => {
   const { addToCart } = useContext(CartContext);
 
   return (
-    <main className="min-h-screen bg-blue-200">
+    <main className="min-h-screen bg-blue-100">
       <NavBar />
       <h1 className="text-3xl font-bold mb-4 text-center font-irish p-3"> Products </h1>
       <div className="max-w-7xl mx-auto p-4">

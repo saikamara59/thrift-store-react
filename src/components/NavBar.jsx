@@ -1,11 +1,12 @@
 import storelogo from '../assets/storelogo.png';
 import vintage from '../assets/vintage.jpg';
-import { CiShoppingCart } from "react-icons/ci";
+import { FaShoppingCart } from "react-icons/fa";
 import { useContext } from 'react';
 import { Link, useNavigate } from 'react-router';
 import { UserContext } from '../contexts/UserContext';
 import React from 'react';
 import { FaSignOutAlt } from "react-icons/fa";
+import { FaStore } from "react-icons/fa";
 
 const NavBar = () => {
   const { user, setUser } = useContext(UserContext);
@@ -31,16 +32,16 @@ const NavBar = () => {
           <>
             <li>Welcome, {user.username}</li>
             <li>
-              <Link to="/products">Products</Link>
+              <Link to="/products"><FaStore className='text-3xl' /></Link>
             </li>
             <li>
               <Link to="/cart">
-                <CiShoppingCart className="text-2xl" /> 
+                <FaShoppingCart  className="text-3xl" /> 
               </Link>
             </li>
             <li>
               <Link to="/home" onClick={handleSignOut}>
-                <FaSignOutAlt className='text-2xl' />
+                <FaSignOutAlt className='text-3xl' />
               </Link>
             </li>
           </>
