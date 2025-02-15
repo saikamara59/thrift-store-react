@@ -26,13 +26,20 @@
 
 ## Attributions :
 
-1.<https://stackoverflow.co/teams/use-cases/engineering/> Stack Overflow
+1. <https://stackoverflow.co/teams/use-cases/engineering/> Stack Overflow
+
 2. <https://react.dev/> React Dev
+
 3. <https://www.deepseek.com/> Deep Seek Ai
+
 4. <https://developer.mozilla.org/en-US/> MDN
+
 5. <https://www.geeksforgeeks.org/> Geeks For Geeks
+
 6. <https://react-icons.github.io/react-icons/> React Icons
+
 7. <https://www.figma.com/design/T94FeixjSbpFcT3vXnBO5m/Untitled?node-id=0-1&p=f&t=OHjs4iDXnaT85r7n-0> Figma
+
 8. <https://www.framer.com/> Framer Motion
 
 ## WireFrame :
