@@ -63,9 +63,8 @@
 - Python
 
 
-## Customer UserStories
--
-Customer User Stories
+## Customer User Stories
+
 Browse Products
 
 As a customer, I want to browse through a list of products so that I can find items I like.
