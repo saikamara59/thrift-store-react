@@ -93,7 +93,7 @@ As a customer, I want to log in to my account so that I can view my order histor
 
 
 ## Stretch Goals
--Allow users to share products on social media platforms like Instagram, Facebook, and Twitter.
+- Allow users to share products on social media platforms like Instagram, Facebook, and Twitter.
 - Add Discount To Products 
 - Use AI to improve the search functionality, allowing users to find products using natural language queries.
 - Allow customers to leave reviews and ratings for products they’ve purchased.
