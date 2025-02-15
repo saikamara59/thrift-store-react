@@ -15,11 +15,10 @@ const HomePage = () => {
             About
           </h1>
           <p className="text-left mt-4 md:mt-7 font-irish font-bold text-md md:text-md">
-            A New York Thrift Store was started by a young developer by the name of Saidu Kamara in 2025. This store sells high-end fashion pieces and rare vintage items. We purchase rare items as well.
+          Welcome to A New York Thrift Store, where fashion meets sustainability! Founded in 2025 by Saidu Kamara, our store was born out of a passion for unique, high-quality fashion and a commitment to reducing waste in the fashion industry. We believe that style shouldn't come at the expense of the planet, and that's why we're dedicated to offering a curated selection of vintage, pre-loved, and rare fashion pieces. We get rare timeless pieces from past decades that tell a story.
           </p>
         </div>
 
-        
         <div className="w-full md:w-1/2 p-4 md:p-6 bg-opacity-20 rounded-lg shadow-inner flex flex-col items-end">
           <Link
             className="text-right mb-2 font-irish font-bold text-blue-300 text-2xl md:text-5xl"
@@ -36,7 +35,6 @@ const HomePage = () => {
         </div>
       </div>
 
-      
       <footer className="bg-customYellow text-center py-4 mt-auto">
         <p className="text-md md:text-lg font-irish">
           &copy; 2025 A New York Thrift Store. All rights reserved.

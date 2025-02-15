@@ -1,11 +1,11 @@
 import React, { useState, useContext } from 'react';
 import { CartContext } from '../contexts/CartContext';
-import { useNavigate } from 'react-router';
+import { useNavigate } from 'react-router-dom';
 import { createOrder } from '../services/orderService';
 import NavBar from './NavBar';
 
 const CheckoutPage = () => {
-  const { cartItems, checkout,removeFromCart,updateQuantity } = useContext(CartContext); // Destructure checkout from CartContext
+  const { cartItems, checkout, removeFromCart, updateQuantity } = useContext(CartContext);
   const navigate = useNavigate();
 
   const [shippingInfo, setShippingInfo] = useState({
@@ -33,15 +33,32 @@ const CheckoutPage = () => {
   });
 
   const [useShippingAsBilling, setUseShippingAsBilling] = useState(false);
+  const [error, setError] = useState('');
 
-  const subtotal = cartItems.reduce(
-    (total, item) => total + item.price * item.quantity,
-    0
-  );
+  const subtotal = cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
   const shippingCost = 6.99;
   const total = subtotal + shippingCost;
 
+  const validateForm = () => {
+    if (!shippingInfo.name || !shippingInfo.address || !shippingInfo.city || !shippingInfo.state || !shippingInfo.zip) {
+      setError('Please fill out all shipping information fields.');
+      return false;
+    }
+    if (!useShippingAsBilling && (!billingInfo.name || !billingInfo.address || !billingInfo.city || !billingInfo.state || !billingInfo.zip)) {
+      setError('Please fill out all billing information fields.');
+      return false;
+    }
+    if (!paymentInfo.cardholderName || !paymentInfo.cardNumber || !paymentInfo.expirationDate || !paymentInfo.cvv) {
+      setError('Please fill out all payment information fields.');
+      return false;
+    }
+    setError('');
+    return true;
+  };
+
   const handlePayment = async () => {
+    if (!validateForm()) return;
+
     try {
       const orderData = {
         total_amount: total,
@@ -52,19 +69,14 @@ const CheckoutPage = () => {
           price: item.price,
         })),
       };
-      console.log('Order Data:', orderData);
-  
+
       const res = await createOrder(orderData);
       console.log('Order created:', res);
-  
-      // Call the checkout function from CartContext
       checkout(shippingInfo, paymentInfo);
-  
-      // Navigate to the order confirmation page
       navigate('/order-confirmation');
     } catch (error) {
-      console.log('Payment failed:', error);
-      alert('Payment failed. Please try again.');
+      console.error('Payment failed:', error);
+      setError('Payment failed. Please try again.');
     }
   };
 
@@ -84,176 +96,126 @@ const CheckoutPage = () => {
   };
 
   return (
-    <main>
+    <main className="bg-blue-200 p-4">
       <NavBar />
-      <h1>Checkout</h1>
-      <section>
-        <h2>Order Summary</h2>
+      <h1 className="font-bold text-2xl text-center mb-6">Checkout</h1>
+
+      {error && <p className="text-red-500 text-center mb-4">{error}</p>}
+
+      <section className="mb-8">
+        <h2 className="text-xl font-semibold mb-4">Order Summary</h2>
         {cartItems.length === 0 ? (
           <p>Your cart is empty.</p>
         ) : (
           <>
-            <div>
+            <div className="grid grid-cols-4 sm:grid-cols-2 lg:grid-cols-3 gap-7 shadow-md">
               {cartItems.map((item) => (
-                <div key={item.id} style={{ borderBottom: '1px solid #ccc', padding: '10px 0' }}>
-                  <img
-                    src={item.image_url}
-                    alt={item.name}
-                    style={{ width: '100px', height: 'auto' }}
-                  />
-                  <h3>{item.name}</h3>
-                  <p>Price: ${item.price}</p>
-                  <p>Description: {item.description}</p>
-                  <p>Condition: {item.condition}</p>
-                  <div>
-                    <label>Quantity:</label>
-                    <input
-                      type="number"
-                      value={item.quantity}
-                      min="1"
-                      onChange={(e) => updateQuantity(item.id, parseInt(e.target.value))}
-                    />
-                  </div>
-                  <button onClick={() => removeFromCart(item.id)}>Remove</button>
-                  <p>Subtotal: ${(item.price * item.quantity).toFixed(2)}</p>
+                <div key={item.id} className="bg-white rounded-lg shadow-md p-4 hover:shadow-lg transition-shadow duration-300">
+                  <img src={item.image_url} alt={item.name} className="w-full h-48 object-cover rounded-md mb-4" />
+                  <h3 className="text-xl font-semibold">{item.name}</h3>
+                  <p className="text-gray-600">Price: ${item.price}</p>
+                  <p className="text-gray-600">Quantity: {item.quantity}</p>
+                  <p className="text-gray-600">Subtotal: ${(item.price * item.quantity).toFixed(2)}</p>
+                  <button
+                    className="w-full mt-4 bg-red-500 text-white py-2 px-4 rounded-md hover:bg-red-600"
+                    onClick={() => removeFromCart(item.id)}
+                  >
+                    Remove
+                  </button>
                 </div>
               ))}
             </div>
-            <div>
-              <h2>Order Total</h2>
+            <div className="mt-6">
+              <h2 className="text-xl font-semibold">Order Total</h2>
               <p>Subtotal: ${subtotal.toFixed(2)}</p>
               <p>Shipping: ${shippingCost.toFixed(2)}</p>
-              <p>Total: ${total.toFixed(2)}</p>
+              <p className="font-bold">Total: ${total.toFixed(2)}</p>
             </div>
           </>
         )}
       </section>
 
-      <section>
-        <h2>Shipping Information</h2>
-        <form>
-          <label>Name</label>
-          <input
-            type="text"
-            value={shippingInfo.name}
-            onChange={(e) => setShippingInfo({ ...shippingInfo, name: e.target.value })}
-          />
-          <label>Address</label>
-          <input
-            type="text"
-            value={shippingInfo.address}
-            onChange={(e) => setShippingInfo({ ...shippingInfo, address: e.target.value })}
-          />
-          <label>City</label>
-          <input
-            type="text"
-            value={shippingInfo.city}
-            onChange={(e) => setShippingInfo({ ...shippingInfo, city: e.target.value })}
-          />
-          <label>State</label>
-          <input
-            type="text"
-            value={shippingInfo.state}
-            onChange={(e) => setShippingInfo({ ...shippingInfo, state: e.target.value })}
-          />
-          <label>Zip Code</label>
-          <input
-            type="text"
-            value={shippingInfo.zip}
-            onChange={(e) => setShippingInfo({ ...shippingInfo, zip: e.target.value })}
-          />
+      <section className="mb-8">
+        <h2 className="text-xl font-semibold mb-4">Shipping Information</h2>
+        <form className="grid grid-cols-1 gap-4">
+          {['name', 'address', 'city', 'state', 'zip'].map((field) => (
+            <div key={field}>
+              <label className="block text-gray-700">{field.charAt(0).toUpperCase() + field.slice(1)}</label>
+              <input
+                type="text"
+                value={shippingInfo[field]}
+                onChange={(e) => setShippingInfo({ ...shippingInfo, [field]: e.target.value })}
+                className="w-full p-2 border rounded-md"
+                required
+              />
+            </div>
+          ))}
         </form>
       </section>
 
-      <section>
-        <h2>Billing Information</h2>
-        <form>
-          <label>
+      <section className="mb-8">
+        <h2 className="text-xl font-semibold mb-4">Billing Information</h2>
+        <form className="grid grid-cols-1 gap-4">
+          <label className="flex items-center">
             <input
               type="checkbox"
               checked={useShippingAsBilling}
               onChange={handleUseShippingAsBillingChange}
+              className="mr-2"
             />
             Use shipping address for billing
           </label>
-          <br />
-          <label>Name</label>
-          <input
-            type="text"
-            value={billingInfo.name}
-            onChange={(e) => setBillingInfo({ ...billingInfo, name: e.target.value })}
-            disabled={useShippingAsBilling}
-          />
-          <label>Address</label>
-          <input
-            type="text"
-            value={billingInfo.address}
-            onChange={(e) => setBillingInfo({ ...billingInfo, address: e.target.value })}
-            disabled={useShippingAsBilling}
-          />
-          <label>City</label>
-          <input
-            type="text"
-            value={billingInfo.city}
-            onChange={(e) => setBillingInfo({ ...billingInfo, city: e.target.value })}
-            disabled={useShippingAsBilling}
-          />
-          <label>State</label>
-          <input
-            type="text"
-            value={billingInfo.state}
-            onChange={(e) => setBillingInfo({ ...billingInfo, state: e.target.value })}
-            disabled={useShippingAsBilling}
-          />
-          <label>Zip Code</label>
-          <input
-            type="text"
-            value={billingInfo.zip}
-            onChange={(e) => setBillingInfo({ ...billingInfo, zip: e.target.value })}
-            disabled={useShippingAsBilling}
-          />
+          {['name', 'address', 'city', 'state', 'zip'].map((field) => (
+            <div key={field}>
+              <label className="block text-gray-700">{field.charAt(0).toUpperCase() + field.slice(1)}</label>
+              <input
+                type="text"
+                value={billingInfo[field]}
+                onChange={(e) => setBillingInfo({ ...billingInfo, [field]: e.target.value })}
+                className="w-full p-2 border rounded-md"
+                disabled={useShippingAsBilling}
+                required={!useShippingAsBilling}
+              />
+            </div>
+          ))}
         </form>
       </section>
 
-      <section>
-        <h2>Payment Information</h2>
-        <form>
-          <label>Cardholder Name</label>
-          <input
-            type="text"
-            value={paymentInfo.cardholderName}
-            onChange={(e) => setPaymentInfo({ ...paymentInfo, cardholderName: e.target.value })}
-          />
-          <label>Card Number</label>
-          <input
-            type="text"
-            value={paymentInfo.cardNumber}
-            onChange={(e) => setPaymentInfo({ ...paymentInfo, cardNumber: e.target.value })}
-          />
-          <label>Expiration Date</label>
-          <input
-            type="text"
-            value={paymentInfo.expirationDate}
-            onChange={(e) => setPaymentInfo({ ...paymentInfo, expirationDate: e.target.value })}
-          />
-          <label>CVV</label>
-          <input
-            type="text"
-            value={paymentInfo.cvv}
-            onChange={(e) => setPaymentInfo({ ...paymentInfo, cvv: e.target.value })}
-          />
-          <label>Payment Method</label>
-          <select
-            value={paymentInfo.paymentMethod}
-            onChange={(e) => setPaymentInfo({ ...paymentInfo, paymentMethod: e.target.value })}
-          >
-            <option value="creditCard">Credit Card</option>
-            <option value="paypal">PayPal</option>
-          </select>
+      <section className="mb-8">
+        <h2 className="text-xl font-semibold mb-4">Payment Information</h2>
+        <form className="grid grid-cols-1 gap-4">
+          {['cardholderName', 'cardNumber', 'expirationDate', 'cvv'].map((field) => (
+            <div key={field}>
+              <label className="block text-gray-700">{field.charAt(0).toUpperCase() + field.slice(1)}</label>
+              <input
+                type={field === 'cardNumber' || field === 'cvv' ? 'password' : 'text'}
+                value={paymentInfo[field]}
+                onChange={(e) => setPaymentInfo({ ...paymentInfo, [field]: e.target.value })}
+                className="w-full p-2 border rounded-md"
+                required
+              />
+            </div>
+          ))}
+          <div>
+            <label className="block text-gray-700">Payment Method</label>
+            <select
+              value={paymentInfo.paymentMethod}
+              onChange={(e) => setPaymentInfo({ ...paymentInfo, paymentMethod: e.target.value })}
+              className="w-full p-2 border rounded-md"
+            >
+              <option value="creditCard">Credit Card</option>
+              <option value="paypal">PayPal</option>
+            </select>
+          </div>
         </form>
       </section>
 
-      <button onClick={handlePayment}>Confirm Payment</button>
+      <button
+        onClick={handlePayment}
+        className="w-full bg-green-500 text-white py-2 px-4 rounded-md hover:bg-green-600"
+      >
+        Confirm Payment
+      </button>
     </main>
   );
 };

@@ -27,7 +27,7 @@ const ProductDetails = () => {
   if (!product) return <main>Loading...</main>;
 
   return (
-    <main className="min-h-screen bg-blue-100">
+    <main className="min-h-screen bg-blue-200">
       <NavBar />
       <section className="flex justify-center items-center p-6">
         <div className="bg-white rounded-lg shadow-lg overflow-hidden max-w-2xl w-full">
@@ -38,8 +38,8 @@ const ProductDetails = () => {
             className="w-full h-full object-cover"
           />
           <div className="p-6">
-            <h1 className="text-2xl font-bold mb-2">{product.name}</h1>
-            <p className="text-gray-700 mb-4">{product.description}</p>
+            <h1 className="text-2xl font-bold mb-2 font-irish">{product.name}</h1>
+            <p className="text-gray-800 mb-4">{product.description}</p>
             <div className="space-y-2">
               <p className="text-lg font-semibold">Price: ${product.price}</p>
               <p className="text-gray-600">Size: {product.size}</p>
@@ -47,16 +47,16 @@ const ProductDetails = () => {
             </div>
 
             
-            <div className="mt-6 flex space-x-4">
+            <div className="mt-7 flex space-x-4">
               <button
                 onClick={() => addToCart(product)}
-                className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+                className="bg-red-700 text-white px-4 py-2 rounded hover:bg-purple-800 font-irish"
               >
                 Add to Cart
               </button>
               <button
                 onClick={() => navigate('/products')}
-                className="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600"
+                className="bg-purple-500 text-white px-4 py-2 rounded hover:bg-gray-600 shadow-xl"
               >
                 Return to All Products
               </button>

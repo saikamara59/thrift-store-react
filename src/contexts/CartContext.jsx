@@ -1,62 +1,11 @@
-// import React, { createContext, useState } from 'react';
-
-// // Create the CartContext
-// export const CartContext = createContext();
-
-// // CartProvider component
-// export const CartProvider = ({ children }) => {
-//   const [cartItems, setCartItems] = useState([]);
-//    console.log('Cart Items:', cartItems)
-//   // Add a product to the cart
-//   const [orders, setOrders] = useState([]);  
-
-
-//   const addToCart = (product) => {
-//     setCartItems((prevCart) => [...prevCart, { ...product, quantity: 1 }]); 
-//   };
-  
-  
-
-//   // Remove a product from the cart
-  
-  
-
-//   // Update the quantity of a product in the cart
-//   const updateQuantity = (productId, quantity) => {
-//     setCartItems((prevItems) =>
-//       prevItems.map((item) =>
-//         item.id === productId ? { ...item, quantity } : item
-//       )
-//     );
-//   };
-
-//   // Clear the entire cart
-//   const clearCart = () => {
-//     setCartItems([]);
-//   };
-
-//   // Value to be provided by the context
-//   const value = {
-//     cartItems,
-//     addToCart,
-//     removeFromCart,
-//     updateQuantity,
-//     clearCart,
-//   };
-
-//   return (
-//     <CartContext.Provider value={value}>
-//       {children}
-//     </CartContext.Provider>
-//   );
-// };
-
 import React, { createContext, useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 
 const CartContext = createContext();
 
 const CartProvider = ({ children }) => {
+
+  
   const navigate = useNavigate();
   const [cartItems, setCartItems] = useState(() => {
     const storedCart = localStorage.getItem('cartItems');

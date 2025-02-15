@@ -1,4 +1,5 @@
 import storelogo from '../assets/storelogo.png';
+import vintage from '../assets/vintage.jpg';
 import { CiShoppingCart } from "react-icons/ci";
 import { useContext } from 'react';
 import { Link, useNavigate } from 'react-router';
@@ -7,26 +8,24 @@ import React from 'react';
 import { FaSignOutAlt } from "react-icons/fa";
 
 const NavBar = () => {
-  // Access user and setUser from the UserContext
   const { user, setUser } = useContext(UserContext);
-
   const navigate = useNavigate();
 
   const handleSignOut = () => {
-    // Clear the token from localStorage
     localStorage.removeItem('token');
-    // Clear the user state
     setUser(null);
     navigate('/home');
   };
 
   return (
-    <nav className="flex items-center justify-between p-4 bg-blue-300 text-black relative opacity-80 text-md">
+    <nav 
+      className="flex items-center justify-between p-4 text-white relative text-lg"
+      style={{ backgroundImage: `url(${vintage})`, backgroundSize: 'cover', backgroundPosition: 'center', opacity: 0.9 }}
+    >
       <div className="absolute left-4 top-4">
         <img src={storelogo} alt="Store Logo" className="h-11" />
       </div>
 
-   
       <ul className="flex space-x-6 items-center justify-center flex-grow"> 
         {user ? (
           <>

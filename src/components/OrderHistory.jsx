@@ -1,11 +1,20 @@
 import React, { useContext } from 'react';
 import { CartContext } from '../contexts/CartContext';
+import { useNavigate } from 'react-router';
+import NavBar from './NavBar';
+
 
 const OrderHistory = () => {
   const { orders } = useContext(CartContext);
+const navigate = useNavigate();
+
+
+  localStorage.removeItem(getUserFromToken());
+  navigate('/home'); 
 
   return (
     <main>
+      <NavBar/>
       <h1>Order History</h1>
       {orders.length === 0 ? (
         <p>No orders yet.</p>
