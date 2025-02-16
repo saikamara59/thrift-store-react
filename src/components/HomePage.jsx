@@ -13,7 +13,7 @@ const HomePage = () => {
           <h1 className="text-3xl md:text-5xl font-irish font-bold text-red-500">
             About
           </h1>
-          <p className="text-left mt-4 md:mt-7 font-irish font-bold text-lg md:text-md">
+          <p className="text-left mt-4 md:mt-7 font-irish font-semibold text-xl md:text-md">
             Welcome to A New York Thrift Store, where fashion meets
             sustainability! Founded in 2025 by Saidu Kamara, our store was born
             out of a passion for unique, high-quality fashion and a commitment
