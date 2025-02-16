@@ -164,7 +164,6 @@ const CheckoutPage = () => {
           </>
         )}
       </section>
-
       <section className="mb-8">
         <h2 className="text-xl font-semibold mb-4">Shipping Information</h2>
         <form className="grid grid-cols-1 gap-4 shadow-sm">

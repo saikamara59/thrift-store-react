@@ -8,7 +8,6 @@ const index = async () => {
     const products = await res.json();
     return products;
   } catch (error) {
-    console.log(error);
   }
 };
 
@@ -18,7 +17,6 @@ const show = async (productId) => {
       headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
     });
     const product = await res.json();
-    console.log(product);
     return product;
   } catch (error) {
     console.log(error);

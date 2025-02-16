@@ -1,6 +1,6 @@
 import React from "react";
 import { useContext, useState, useEffect } from "react";
-import { Route, Routes } from "react-router";
+import { Route, Routes, Navigate } from "react-router-dom";
 import { UserContext } from "./contexts/UserContext";
 import LandingPage from "./components/LandingPage";
 import HomePage from "./components/HomePage";
@@ -16,8 +16,8 @@ import OrderConfirmation from "./components/OrderConfirmation";
 
 const App = () => {
   const { user } = useContext(UserContext);
-
   const [products, setProducts] = useState([]);
+  const [isLoading, setIsLoading] = useState(true); 
 
   useEffect(() => {
     const fetchAllProducts = async () => {
@@ -26,16 +26,29 @@ const App = () => {
         setProducts(productsData || []);
       } catch (error) {
         console.log("Error fetching products:", error);
+      } finally {
+        setIsLoading(false); 
       }
     };
 
-    if (user) fetchAllProducts();
+    if (user) {
+      fetchAllProducts();
+    } else {
+      setIsLoading(false); 
+    }
   }, [user]);
+
+  if (isLoading) {
+    return <div>Loading...</div>; 
+  }
 
   return (
     <>
       <Routes>
         <Route path="/" element={<LandingPage />} />
+        <Route path="/home" element={<HomePage />} />
+        <Route path="/sign-in" element={<SignInForm />} />
+        <Route path="/sign-up" element={<SignUpForm />} />
         {user ? (
           <>
             <Route
@@ -49,11 +62,7 @@ const App = () => {
             <Route path="/order-confirmation" element={<OrderConfirmation />} />
           </>
         ) : (
-          <>
-            <Route path="/home" element={<HomePage />} />
-            <Route path="/sign-in" element={<SignInForm />} />
-            <Route path="/sign-up" element={<SignUpForm />} />
-          </>
+          <Route path="*" element={<Navigate to="/sign-in" />} />
         )}
       </Routes>
     </>

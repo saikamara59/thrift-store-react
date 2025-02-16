@@ -87,13 +87,13 @@ const SignInForm = () => {
           <div className="flex space-x-4">
             <button
               type="submit"
-              className="w-full py-2 px-4 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 shadow-blue-500/50"
+              className="w-full py-2 px-4 bg-indigo-600 text-white rounded-md hover:bg-indigo-800 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 shadow-blue-500/50"
             >
               Sign In
             </button>
             <button
               type="button"
-              className="w-full py-2 px-4 bg-gray-500 text-white rounded-md hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 shadow-xl delay-150"
+              className="w-full py-2 px-4 bg-gray-700 text-white rounded-md hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 shadow-xl delay-150"
               onClick={() => navigate("/home")}
             >
               Cancel
