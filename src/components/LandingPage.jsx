@@ -27,7 +27,7 @@ const LandingPage = () => {
         </p>
         <button
           onClick={() => navigate("/home")}
-          className="text-lg md:text-xl text-white px-4 py-2 border border-white rounded hover:bg-white hover:text-black transition"
+          className="text-lg md:text-xl text-white px-4 py-2 border border-transparent rounded hover:bg-white hover:text-black transition"
         >
           Enter Store
         </button>

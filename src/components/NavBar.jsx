@@ -35,7 +35,7 @@ const NavBar = () => {
       <ul className="flex space-x-6 items-center justify-center flex-grow">
         {user ? (
           <>
-            <li>Welcome, {user.username}</li>
+            <li className="text-md text-black font-semibold">Welcome, {user.username}</li>
             <li>
               <Link to="/products">
                 <FaStore className="text-3xl" />
