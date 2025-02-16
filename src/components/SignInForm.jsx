@@ -1,23 +1,22 @@
-// src/components/SignInForm/SignInForm.jsx
-import React from 'react';
-import { useState, useContext } from 'react';
-import { useNavigate } from 'react-router';
-import { signIn } from '../services/authService';
-import { UserContext } from '../contexts/UserContext';
-import storelogo from '../assets/storelogo.png'; 
-import thriftbg from '../assets/thriftstore.jpg'; 
+import React from "react";
+import { useState, useContext } from "react";
+import { useNavigate } from "react-router";
+import { signIn } from "../services/authService";
+import { UserContext } from "../contexts/UserContext";
+import storelogo from "../assets/storelogo.png";
+import thriftbg from "../assets/thriftstore.jpg";
 
 const SignInForm = () => {
   const navigate = useNavigate();
   const { setUser } = useContext(UserContext);
-  const [message, setMessage] = useState('');
+  const [message, setMessage] = useState("");
   const [formData, setFormData] = useState({
-    username: '',
-    password: '',
+    username: "",
+    password: "",
   });
 
   const handleChange = (evt) => {
-    setMessage('');
+    setMessage("");
     setFormData({ ...formData, [evt.target.name]: evt.target.value });
   };
 
@@ -26,9 +25,9 @@ const SignInForm = () => {
     try {
       const signedInUser = await signIn(formData);
       setUser(signedInUser);
-      navigate('/products');
+      navigate("/products");
     } catch (err) {
-      setMessage(err.message || 'An error occurred during sign-in.');
+      setMessage(err.message || "An error occurred during sign-in.");
     }
   };
 
@@ -42,12 +41,19 @@ const SignInForm = () => {
       </div>
 
       <main className="bg-red-400 bg-opacity-80 p-7 rounded-lg shadow-lg w-full max-w-md inner-shadow inset-shadow-indigo-500">
-        <h1 className="text-4xl mb-4 text-center font-irish font-bold">Sign In</h1>
+        <h1 className="text-4xl mb-4 text-center font-irish font-bold">
+          Sign In
+        </h1>
         {message && <p className="text-red-200 text-center mb-4">{message}</p>}
-        <h2 className="text-center text-lg">Enter your correct details to get started</h2>
+        <h2 className="text-center text-lg">
+          Enter your correct details to get started
+        </h2>
         <form autoComplete="off" onSubmit={handleSubmit} className="space-y-6">
           <div>
-            <label htmlFor="username" className="block text-2xl font-medium p-2">
+            <label
+              htmlFor="username"
+              className="block text-2xl font-medium p-2"
+            >
               Username
             </label>
             <input
@@ -88,7 +94,7 @@ const SignInForm = () => {
             <button
               type="button"
               className="w-full py-2 px-4 bg-gray-500 text-white rounded-md hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 shadow-xl delay-150"
-              onClick={() => navigate('/home')}
+              onClick={() => navigate("/home")}
             >
               Cancel
             </button>

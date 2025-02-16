@@ -1,42 +1,42 @@
-import React, { createContext, useEffect, useState } from 'react';
-import { useNavigate } from 'react-router';
+import React, { createContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router";
 
 const CartContext = createContext();
 
 const CartProvider = ({ children }) => {
-
-  
   const navigate = useNavigate();
   const [cartItems, setCartItems] = useState(() => {
-    const storedCart = localStorage.getItem('cartItems');
+    const storedCart = localStorage.getItem("cartItems");
     return storedCart ? JSON.parse(storedCart) : [];
   });
 
   const [orders, setOrders] = useState(() => {
-    const storedOrders = localStorage.getItem('orders');
+    const storedOrders = localStorage.getItem("orders");
     return storedOrders ? JSON.parse(storedOrders) : [];
   });
 
   const [lastOrder, setLastOrder] = useState(() => {
-    const storedLastOrder = localStorage.getItem('lastOrder');
+    const storedLastOrder = localStorage.getItem("lastOrder");
     return storedLastOrder ? JSON.parse(storedLastOrder) : null;
   });
 
   useEffect(() => {
-    localStorage.setItem('cartItems', JSON.stringify(cartItems));
+    localStorage.setItem("cartItems", JSON.stringify(cartItems));
   }, [cartItems]);
 
   useEffect(() => {
-    localStorage.setItem('orders', JSON.stringify(orders));
+    localStorage.setItem("orders", JSON.stringify(orders));
   }, [orders]);
 
   useEffect(() => {
-    localStorage.setItem('lastOrder', JSON.stringify(lastOrder));
+    localStorage.setItem("lastOrder", JSON.stringify(lastOrder));
   }, [lastOrder]);
 
   const addToCart = (product) => {
     setCartItems((prevCart) => {
-      const existingItem = prevCart.find((item) => item.id === product.product_id);
+      const existingItem = prevCart.find(
+        (item) => item.id === product.product_id
+      );
       if (existingItem) {
         return prevCart.map((item) =>
           item.id === product.product_id
@@ -44,28 +44,43 @@ const CartProvider = ({ children }) => {
             : item
         );
       } else {
-        return [...prevCart, { ...product, id: product.product_id, quantity: 1, price: parseFloat(product.price) }];
+        return [
+          ...prevCart,
+          {
+            ...product,
+            id: product.product_id,
+            quantity: 1,
+            price: parseFloat(product.price),
+          },
+        ];
       }
     });
   };
 
   const removeFromCart = (productId) => {
-    setCartItems((prevItems) => prevItems.filter((item) => item.id !== productId));
+    setCartItems((prevItems) =>
+      prevItems.filter((item) => item.id !== productId)
+    );
   };
 
   const updateQuantity = (productId, quantity) => {
     setCartItems((prevItems) =>
-      prevItems.map((item) => (item.id === productId ? { ...item, quantity } : item))
+      prevItems.map((item) =>
+        item.id === productId ? { ...item, quantity } : item
+      )
     );
   };
 
   const calculateTotal = () => {
-    return cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
+    return cartItems.reduce(
+      (total, item) => total + item.price * item.quantity,
+      0
+    );
   };
 
   const checkout = (shippingInfo, paymentInfo) => {
     if (cartItems.length === 0) {
-      alert('Your cart is empty!');
+      alert("Your cart is empty!");
       return;
     }
 
@@ -79,10 +94,10 @@ const CartProvider = ({ children }) => {
     };
 
     setOrders((prevOrders) => [...prevOrders, order]);
-    setLastOrder(order); // Save the last order
-    setCartItems([]); // Clear the cart
+    setLastOrder(order);
+    setCartItems([]); 
 
-    navigate('/order-confirmation'); // Redirect to order confirmation
+    navigate("/order-confirmation"); 
   };
 
   const value = {

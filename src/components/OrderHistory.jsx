@@ -1,7 +1,7 @@
-import React, { useContext } from 'react';
-import { CartContext } from '../contexts/CartContext';
-import { useNavigate } from 'react-router';
-import NavBar from './NavBar';
+import React, { useContext } from "react";
+import { CartContext } from "../contexts/CartContext";
+import { useNavigate } from "react-router";
+import NavBar from "./NavBar";
 
 const OrderHistory = () => {
   const { orders } = useContext(CartContext);

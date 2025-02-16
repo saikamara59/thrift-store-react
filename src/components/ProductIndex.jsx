@@ -9,7 +9,10 @@ const ProductIndex = ({ products }) => {
   return (
     <main className="min-h-screen bg-blue-100">
       <NavBar />
-      <h1 className="text-3xl font-bold mb-4 text-center font-irish p-3"> Products </h1>
+      <h1 className="text-3xl font-bold mb-4 text-center font-irish p-4">
+        {" "}
+        Products{" "}
+      </h1>
       <div className="max-w-7xl mx-auto p-4">
         <div className="flex flex-wrap gap-4 justify-center">
           {products.map((product) => (
@@ -25,10 +28,18 @@ const ProductIndex = ({ products }) => {
                     className="w-32 h-32 sm:w-24 sm:h-24 object-cover rounded-md mb-2"
                   />
                   <h3 className="text-lg font-semibold">{product.name}</h3>
-                  <p className="text-md text-gray-600 mt-1">{product.description}</p>
-                  <p className="text-md font-bold mt-1">Price: ${product.price}</p>
-                  <p className="text-md text-gray-600 mt-1">Size: {product.size}</p>
-                  <p className="text-md text-gray-600 mt-1">Condition: {product.condition}</p>
+                  <p className="text-md text-gray-600 mt-1">
+                    {product.description}
+                  </p>
+                  <p className="text-md font-bold mt-1">
+                    Price: ${product.price}
+                  </p>
+                  <p className="text-md text-gray-600 mt-1">
+                    Size: {product.size}
+                  </p>
+                  <p className="text-md text-gray-600 mt-1">
+                    Condition: {product.condition}
+                  </p>
                 </article>
               </Link>
               <button

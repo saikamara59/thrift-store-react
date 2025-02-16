@@ -16,8 +16,6 @@ const createOrder = async (orderData) => {
   }
 };
 
-
-
 const fetchUserOrders = async () => {
   try {
     const res = await fetch(BASE_URL, {
@@ -31,7 +29,4 @@ const fetchUserOrders = async () => {
   }
 };
 
-
-export {
-  createOrder,fetchUserOrders
-};
+export { createOrder, fetchUserOrders };

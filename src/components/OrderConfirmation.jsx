@@ -33,7 +33,7 @@ const OrderConfirmation = () => {
   const total = totalPrice + shippingCost;
 
   return (
-    <main className="p-6 bg-blue-100 min-h-screen">
+    <main className="bg-blue-100 min-h-screen">
       <NavBar />
       <div className="max-w-4xl mx-auto mt-8">
         <h1 className="text-3xl font-bold mb-4 text-center sm:text-left">
@@ -115,8 +115,6 @@ const OrderConfirmation = () => {
             View Order History
           </button>
         </div>
-
-        {/* Need Help Section */}
         <section className="bg-white rounded-lg shadow-md p-6">
           <h3 className="text-xl font-semibold mb-4">Need Help?</h3>
           <p>

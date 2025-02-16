@@ -1,37 +1,35 @@
 import React from "react";
 import { useState, useContext } from "react";
-import { useNavigate } from 'react-router';
-import { signUp } from '../services/authService';
-import { UserContext } from '../contexts/UserContext';
-import storelogo from '../assets/storelogo.png'; // Path to your store logo
-import thriftbg from '../assets/thriftstore.jpg'; // Path to your background image
+import { useNavigate } from "react-router";
+import { signUp } from "../services/authService";
+import { UserContext } from "../contexts/UserContext";
+import storelogo from "../assets/storelogo.png";
+import thriftbg from "../assets/thriftstore.jpg";
 
 const SignUpForm = () => {
   const navigate = useNavigate();
   const { setUser } = useContext(UserContext);
-  const [message, setMessage] = useState('');
+  const [message, setMessage] = useState("");
   const [formData, setFormData] = useState({
-    username: '',
-    email: '',
-    password: '',
-    passwordConf: '',
+    username: "",
+    email: "",
+    password: "",
+    passwordConf: "",
   });
 
   const { username, email, password, passwordConf } = formData;
 
   const handleChange = (evt) => {
-    setMessage('');
+    setMessage("");
     setFormData({ ...formData, [evt.target.name]: evt.target.value });
   };
 
   const handleSubmit = async (evt) => {
     evt.preventDefault();
-    console.log(formData);
     try {
       const newUser = await signUp(formData);
-      console.log(newUser);
       setUser(newUser);
-      navigate('/home');
+      navigate("/home");
     } catch (err) {
       setMessage(err.message);
     }
@@ -44,22 +42,26 @@ const SignUpForm = () => {
   return (
     <div
       className="min-h-screen bg-cover bg-center flex flex-col items-center justify-center"
-      style={{ backgroundImage: `url(${thriftbg})` }} 
+      style={{ backgroundImage: `url(${thriftbg})` }}
     >
-      
       <div className="absolute top-5 left-5">
-        <img src={storelogo} alt="Store Logo" className="h-12" /> 
+        <img src={storelogo} alt="Store Logo" className="h-12" />
       </div>
 
-    
       <main className="bg-red-400 bg-opacity-90 p-8 rounded-lg shadow-lg w-full max-w-md inner-shadow">
-        <h1 className="text-4xl  mb-4 text-center font-irish font-bold">Sign Up</h1>
+        <h1 className="text-4xl  mb-4 text-center font-irish font-bold">
+          Sign Up
+        </h1>
         {message && <p className="text-red-500 text-center mb-4">{message}</p>}
-        <h2 className="text-center text-lg">Enter your correct details to get started</h2>
+        <h2 className="text-center text-lg">
+          Enter your correct details to get started
+        </h2>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label htmlFor="username"
-             className="block text-2xl font-medium text-gray-700 p-2">
+            <label
+              htmlFor="username"
+              className="block text-2xl font-medium text-gray-700 p-2"
+            >
               Username
             </label>
             <input
@@ -74,7 +76,10 @@ const SignUpForm = () => {
             />
           </div>
           <div>
-            <label htmlFor="email" className="block font-medium text-gray-700 text-2xl">
+            <label
+              htmlFor="email"
+              className="block font-medium text-gray-700 text-2xl"
+            >
               Email:
             </label>
             <input
@@ -89,8 +94,10 @@ const SignUpForm = () => {
             />
           </div>
           <div>
-            <label htmlFor="password" 
-            className="block text-sm font-medium text-gray-700 text-2xl">
+            <label
+              htmlFor="password"
+              className="block text-sm font-medium text-gray-700 text-2xl"
+            >
               Password:
             </label>
             <input
@@ -105,7 +112,10 @@ const SignUpForm = () => {
             />
           </div>
           <div>
-            <label htmlFor="confirm" className="block text-sm font-medium text-gray-700 text-2xl">
+            <label
+              htmlFor="confirm"
+              className="block text-sm font-medium text-gray-700 text-2xl"
+            >
               Confirm Password:
             </label>
             <input
@@ -129,7 +139,7 @@ const SignUpForm = () => {
             </button>
             <button
               type="button"
-              onClick={() => navigate('/home')}
+              onClick={() => navigate("/home")}
               className="w-full py-2 px-4 bg-gray-500 text-white rounded-md hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
             >
               Cancel
