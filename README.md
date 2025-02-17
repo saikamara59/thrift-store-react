@@ -12,7 +12,7 @@ A New York Thrift Store is a full stack web e-commerce platform designed to brin
 
 ## Features: 
 
-- User Authentication: Sign up, log in, and manage your account securely.
+- User Authentication: Sign up, sign in, and manage your account securely.
 
 - Product Browsing: Explore a wide range of vintage and thrifted items.
 
