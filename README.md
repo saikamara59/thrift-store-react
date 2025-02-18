@@ -6,8 +6,9 @@
 A New York Thrift Store is a full stack web e-commerce platform designed to bring the charm of thrift shopping to your fingertips. Whether you're looking for vintage tees, retro jackets, or unique accessories, our store offers a wide range of items to suit every style. Built with modern web technologies, this platform provides a seamless shopping experience for users while promoting sustainable fashion.
 
 
-## Getting Started - deployment link: Front End -
-## Backend: 
+## Getting Started - deployment link: 
+## Front End: https://newyorkthriftstore.netlify.app/
+## Backend: https://thrift-store-flask-bfc925179c8c.herokuapp.com
 
 
 ## Features: 
