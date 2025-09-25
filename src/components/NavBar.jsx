@@ -4,7 +4,6 @@ import { FaShoppingCart } from "react-icons/fa";
 import { useContext } from "react";
 import { Link, useNavigate } from "react-router";
 import { UserContext } from "../contexts/UserContext";
-import React from "react";
 import { FaSignOutAlt } from "react-icons/fa";
 import { FaStore } from "react-icons/fa";
 

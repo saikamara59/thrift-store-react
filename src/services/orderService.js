@@ -12,6 +12,7 @@ const createOrder = async (orderData) => {
     });
     return await res.json();
   } catch (err) {
+    console.log(err);
     throw new Error("Failed to create order");
   }
 };
@@ -25,8 +26,25 @@ const fetchUserOrders = async () => {
     });
     return await res.json();
   } catch (err) {
+    console.log(err);
     throw new Error("Failed to fetch orders");
   }
 };
 
-export { createOrder, fetchUserOrders };
+const fetchAdminOrders = async () => {
+  try {
+    const adminUrl = `${import.meta.env.VITE_BACK_END_SERVER_URL}/admin/orders`;
+    const res = await fetch(adminUrl, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    });
+    return await res.json();
+  } catch (err) {
+    console.log(err);
+    throw new Error("Failed to fetch admin orders");
+  }
+};
+
+
+export { createOrder, fetchUserOrders, fetchAdminOrders };

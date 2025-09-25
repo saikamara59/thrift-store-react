@@ -1,0 +1,15 @@
+version: "3.8"
+services:
+  frontend:
+    build:
+      context: .
+    ports:
+      - "5173:5173"
+    environment:
+      VITE_BACK_END_SERVER_URL: http://backend:5000
+    networks:
+      - thriftnet
+
+networks:
+  thriftnet:
+    external: true
