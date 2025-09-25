@@ -35,6 +35,11 @@ const NavBar = () => {
         {user ? (
           <>
             <li className="text-md text-black font-semibold">Welcome, {user.username}</li>
+            {user.is_admin && (
+              <li>
+                <Link to="/admin/dashboard">Admin Dashboard</Link>
+              </li>
+            )}
             <li>
               <Link to="/products">
                 <FaStore className="text-3xl" />

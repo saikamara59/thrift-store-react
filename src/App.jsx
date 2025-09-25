@@ -16,7 +16,6 @@ import OrderConfirmation from "./components/OrderConfirmation";
 import AdminDashboard from "./components/AdminDashboard";
 import ProtectedRoute from "./components/ProtectedRoute";
 import AdminOrders from "./components/AdminOrders";
-import CreateOrder from "./components/CreateOrder";
 
 const App = () => {
   const { user } = useContext(UserContext);
@@ -70,15 +69,7 @@ const App = () => {
       <AdminOrders />
     </ProtectedRoute>
   }
-/>  
-<Route
-  path="/admin/create-order"
-  element={
-    <ProtectedRoute>
-      <CreateOrder />
-    </ProtectedRoute>
-  }
-/> 
+/>   
 
       {user ? (
         <>

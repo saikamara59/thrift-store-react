@@ -6,6 +6,7 @@ const AdminDashboard = () => (
     <p>Welcome, admin! Here you can manage products, orders, and users.</p>
     <ul>
       <li><Link to="/admin/orders">View All Orders</Link></li>
+      <li><Link to="/admin/product">Create Product</Link></li>
       <li><Link to="/admin/products">Manage Products</Link></li>
       <li><Link to="/admin/users">Manage Users</Link></li>
     </ul>
